@@ -4,4 +4,4 @@ csla:
 logging:
   level:
     root: ERROR
-    ie.sator: INFO
+    ie.sator: DEBUG

@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ie.sator.csla.services.CSLogAnalyzerService;
+import ie.sator.csla.services.LogfileAnalyzerService;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CsLogAnalyzerApplication implements CommandLineRunner {
 
 	@Autowired
-	private CSLogAnalyzerService logAnalyzer;
+	private LogfileAnalyzerService logAnalyzerService;
 	
 	public static void main(String[] args) {
 		var app = new SpringApplication(CsLogAnalyzerApplication.class);
@@ -24,7 +24,13 @@ public class CsLogAnalyzerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+		for (var pathname: args) {
+			log.debug("Analyze {}", pathname);
+			var success = logAnalyzerService.analyzeFile(pathname);
+			if (!success) {
+				log.debug("Failed to analyze {}", pathname);
+			}
+		}
 	}
 
 }
