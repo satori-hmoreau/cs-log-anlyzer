@@ -1,0 +1,7 @@
+csla:
+  inputFile: ${file:log.txt}
+
+logging:
+  level:
+    root: ERROR
+    ie.sator: WARN
