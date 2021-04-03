@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Basic Log analyzer service.
- * One of these should be created for each input file.
- * 
+ * Creates a LogFileAnalyzer each filename presented to it and uses
+ * it to analyze the file.
  */
 @Service
 @Slf4j

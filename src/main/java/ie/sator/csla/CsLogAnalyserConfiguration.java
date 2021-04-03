@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ie.sator.csla.services.EventMatchingService;
 import ie.sator.csla.services.LogfileAnalyzer;
 
@@ -17,6 +20,13 @@ public class CsLogAnalyserConfiguration {
 	@Bean
 	@Scope("prototype")
 	public LogfileAnalyzer logfileAnalyzer() {
-		return new LogfileAnalyzer(eventMatchingService);
+		return new LogfileAnalyzer(eventMatchingService, objectMapper());
+	}
+	
+	@Bean
+	public ObjectMapper objectMapper() {
+		var objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return objectMapper;
 	}
 }

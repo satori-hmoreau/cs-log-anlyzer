@@ -10,11 +10,12 @@
 	</parent>
 	<groupId>ie.sator</groupId>
 	<artifactId>CS-LogAnalyzer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>CS-LogAnalyzer</name>
 	<description>Credit Suisse Test project - Log Analyzer</description>
 	<properties>
 		<java.version>11</java.version>
+    <jacoco.plugin.version>0.8.3</jacoco.plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -45,11 +46,15 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+		<dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -64,6 +69,48 @@
 					</excludes>
 				</configuration>
 			</plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.plugin.version}</version>
+          <configuration>
+            <rules>
+              <rule implementation="org.jacoco.maven.RuleConfiguration">
+                <element>BUNDLE</element>
+                <limits>
+                  <limit implementation="org.jacoco.report.check.Limit">
+                    <counter>INSTRUCTION</counter>
+                    <value>COVEREDRATIO</value>
+                    <minimum>0.80</minimum>
+                  </limit>
+                </limits>
+              </rule>
+            </rules>
+            <!--Excluding the packages which have no business logic to test -->
+            <excludes/>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>jacoco-check</id>
+              <phase>test</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
 		</plugins>
 	</build>
 
