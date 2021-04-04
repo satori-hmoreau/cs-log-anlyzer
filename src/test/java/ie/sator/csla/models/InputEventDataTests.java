@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
 import ie.sator.csla.CsLogAnalyserConfiguration;
+import ie.sator.csla.repositories.MatchedEventRepository;
 import ie.sator.csla.services.EventMatchingService;
 
 @ExtendWith(SpringExtension.class)
@@ -26,6 +28,9 @@ public class InputEventDataTests {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	@MockBean
+	private MatchedEventRepository repository;
 	
 	private static final String GOOD_JSON = 
 			"{\"id\":\"scsmbstgra\", \"state\":\"STARTED\", " + 
