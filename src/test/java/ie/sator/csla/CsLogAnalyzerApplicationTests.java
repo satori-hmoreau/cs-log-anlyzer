@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import ie.sator.csla.services.LogfileAnalyzerService;
 
 @SpringBootTest
+@ActiveProfiles({"test"})
 class CsLogAnalyzerApplicationTests {
 
 	@Test
@@ -20,12 +22,12 @@ class CsLogAnalyzerApplicationTests {
 	
 	@Test
 	void serviceExists() throws Exception {
-		assertTrue(logAnalyzer != null, () -> "No CsLogAnalyzer configured");
+		assertTrue(logAnalyzer != null, () -> "No CsLogAnalyzerService configured");
 	}
 	
 	@Test
 	void runMainNoArgs() throws Exception {
 		CsLogAnalyzerApplication.main(new String[] {"a", "b", "c"});
 	}
-
+	
 }

@@ -1,7 +1,12 @@
-csla:
-  inputFile: ${file:log.txt}
+spring:
+  datasource:
+    url: "jdbc:hsqldb:file:${csla_db:./csla_db}"
+    username: sa
+  jpa:
+    hibernate:
+      ddl-auto: update 
 
 logging:
   level:
     root: ERROR
-    ie.sator: INFO
+    ie.sator: WARN
