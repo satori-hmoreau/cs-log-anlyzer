@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ie.sator.csla.repositories.MatchedEventRepository;
 import ie.sator.csla.services.EventMatchingService;
 import ie.sator.csla.services.LogfileAnalyzer;
 
@@ -17,10 +18,13 @@ public class CsLogAnalyserConfiguration {
 	@Autowired
 	private EventMatchingService eventMatchingService;
 	
+	@Autowired
+	private MatchedEventRepository matchedEventRepository;
+	
 	@Bean
 	@Scope("prototype")
 	public LogfileAnalyzer logfileAnalyzer() {
-		return new LogfileAnalyzer(eventMatchingService, objectMapper());
+		return new LogfileAnalyzer(eventMatchingService, objectMapper(), matchedEventRepository);
 	}
 	
 	@Bean

@@ -1,5 +1,12 @@
 package ie.sator.csla.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,24 +17,36 @@ import lombok.Setter;
  * 
  */
 @Builder
+@Entity
+@Table(name="matched_events")
 public class MatchedEvent {
 
 	@Getter
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	@Getter
 	@Setter
+	@Column(name="event_id", length=32)
 	private String eventId;
 	
 	@Getter
 	@Setter
+	@Column(name="host", length=32)
 	private String host;
+
 	@Getter
 	@Setter
+	@Column(name="event_type", length=32)
 	private String eventType;
 	
 	@Getter
+	@Column(name="event_duration")
 	private Long duration;
-	@Setter
+	
+	@Getter
+	@Column(name="long_event_alert")
 	private Boolean alert;
 	
 	public static MatchedEvent createFrom(InputEventData inputEvent) {

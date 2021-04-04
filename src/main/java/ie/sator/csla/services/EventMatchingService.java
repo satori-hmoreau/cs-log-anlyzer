@@ -2,6 +2,7 @@ package ie.sator.csla.services;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,10 +30,10 @@ public class EventMatchingService {
 	
 	private AtomicInteger matchCount = new AtomicInteger(0);
 	
-	public Boolean matchIncomingEvent(InputEventData eventData) {
+	public Optional<MatchedEvent> matchIncomingEvent(InputEventData eventData) {
 		if (!matchableEvent(eventData)) {
 			log.debug("Not matching event with state {}", eventData.getState());
-			return false;
+			return Optional.empty();
 		}
 		var matchCandidate = MatchedEvent.createFrom(eventData);
 		var result = map.merge(eventData.getEventId(), eventData, 
@@ -40,8 +41,9 @@ public class EventMatchingService {
 					calculateMatchedEvents(existingEv, newEv, matchCandidate) ? null : existingEv);
 		if (result == null) {
 			matchCount.getAndIncrement();
+			return Optional.of(matchCandidate);
 		}
-		return result == null;
+		return Optional.empty();
 	}
 	
 	private Boolean matchableEvent(InputEventData eventData) {
@@ -53,14 +55,12 @@ public class EventMatchingService {
 		if (ev1.isStartEvent() && ev2.isFinishEvent()  
 				|| ev1.isFinishEvent() && ev2.isStartEvent()) {
 			matchResult.calculateDuration(ev1, ev2);
-			if (ev1.isStartEvent()) {
-				if (ev1.getEventType() != null) {
-					matchResult.setEventType(ev1.getEventType());
-				}
-				if (ev1.getHost() != null) {
-					matchResult.setHost(ev1.getHost());
-				}
-			}
+			var startEvent = ev1.isStartEvent() ? ev1 : ev2;
+			var finishEvent = ev1.isFinishEvent() ? ev1 : ev2;
+			matchResult.setHost(startEvent.getHost() != null 
+					? startEvent.getHost() : finishEvent.getHost());
+			matchResult.setEventType(startEvent.getEventType() != null 
+					? startEvent.getEventType() : finishEvent.getEventType());
 			return true;
 		}
 		return false;

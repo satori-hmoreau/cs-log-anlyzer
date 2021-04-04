@@ -7,12 +7,15 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ie.sator.csla.models.AnalyzerState;
 import ie.sator.csla.models.InputEventData;
+import ie.sator.csla.repositories.MatchedEventRepository;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +31,8 @@ public class LogfileAnalyzer {
 	
 	private EventMatchingService eventMatchingService;
 	
+	private MatchedEventRepository repository;
+	
 	private ObjectMapper objectMapper;
 	
 	private AtomicInteger lineCount = new AtomicInteger(0);
@@ -40,9 +45,11 @@ public class LogfileAnalyzer {
 	}
 	
 	@Autowired
-	public LogfileAnalyzer(EventMatchingService eventMatchingService, ObjectMapper objectMapper) {
+	public LogfileAnalyzer(EventMatchingService eventMatchingService, 
+			ObjectMapper objectMapper, MatchedEventRepository repository) {
 		this.eventMatchingService = eventMatchingService;
 		this.objectMapper = objectMapper;
+		this.repository = repository;
 	}
 	
  
@@ -62,8 +69,8 @@ public class LogfileAnalyzer {
 		try {
             try (var lineStream = Files.lines(path)) {
             	status = AnalyzerState.PROCESSSING;
-                long matchedCount = lineStream.map(this::parseEventData).filter(o -> o.isPresent())
-                	.filter(o -> eventMatchingService.matchIncomingEvent(o.get())).collect(Collectors.counting());
+                long matchedCount = lineStream.map(this::parseEventData).filter(Optional::isPresent)
+                	.filter(this::matchAndSaveEvent).collect(Collectors.counting());
                 log.info("Matched {} events", matchedCount);
                 status = AnalyzerState.COMPLETE;
             }
@@ -71,6 +78,16 @@ public class LogfileAnalyzer {
 			log.error("{} caught trying to stream over {}", e, path);
 			status = AnalyzerState.ERROR;
 		}
+	}
+	
+	@Transactional
+	private Boolean matchAndSaveEvent(Optional<InputEventData> data) {
+		var matchedEvent = eventMatchingService.matchIncomingEvent(data.get());
+		if (matchedEvent.isPresent()) {
+			repository.save(matchedEvent.get());
+			return true;
+		}
+		return false;
 	}
 
 }
