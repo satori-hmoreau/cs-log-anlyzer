@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ie.sator</groupId>
 	<artifactId>CS-LogAnalyzer</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>CS-LogAnalyzer</name>
 	<description>Credit Suisse Test project - Log Analyzer</description>
 	<properties>
