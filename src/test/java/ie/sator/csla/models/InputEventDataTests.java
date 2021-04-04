@@ -1,6 +1,7 @@
 package ie.sator.csla.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -46,8 +47,8 @@ public class InputEventDataTests {
 	void testGoodDeserializationNoTypeOrHost() throws Exception {
 		var inputEventData = objectMapper.readValue(GOOD_JSON_NO_HOST_OR_TYPE, InputEventData.class);
 		assertEquals("scsmbstgra", inputEventData.getEventId(), () -> "event id not as expected");
-		assertEquals(InputEventData.UNKNOWN_VALUE, inputEventData.getHost(), () -> "Host not default value");
-		assertEquals(InputEventData.UNKNOWN_VALUE, inputEventData.getEventType(), () -> "Type not default value");
+		assertNull(inputEventData.getHost());
+		assertNull(inputEventData.getEventType());
 	}
 	
 	private static final String GOOD_JSON_MISSING_ID = 

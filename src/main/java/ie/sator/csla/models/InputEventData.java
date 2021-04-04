@@ -3,17 +3,21 @@ package ie.sator.csla.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class InputEventData {
 
-	public static final String UNKNOWN_VALUE = "unknown";
+	public static final String STARTED = "STARTED";
+	public static final String FINISHED = "FINISHED";
 	
 	private String eventId;
 	private String state;
-	private String eventType = UNKNOWN_VALUE;
-	private String host = UNKNOWN_VALUE;
+	private String eventType;
+	private String host;
+	@Builder.Default
 	private Long timestamp = 0L;
 	
 	@JsonCreator
@@ -32,6 +36,14 @@ public class InputEventData {
             this.host = host;
 		}
 		this.timestamp = timestamp;
+	}
+	
+	public Boolean isStartEvent() {
+		return this.state.equals(STARTED);
+	}
+	
+	public Boolean isFinishEvent() {
+		return this.state.equals(FINISHED);
 	}
 	
 }
