@@ -1,5 +1,5 @@
 # cs-log-anlyzer - A sort of a log analyzer application 
-This is a spring boot application that implements the following [spec](file:./spec/Credit Suisse DPG - Coding Assignment for Java.pdf).
+This is a spring boot application that implements the spec to be found here in the *./spec* directory.
 It follows the spec quite closely and varies only to the extent that it accepts multiple filenames on the command line and processes each one in turn. 
 ## Build it
 To build the application, you must have a java 11 development system installed on your platform.
@@ -20,7 +20,8 @@ Java 11.0.1 was used for development, but any Java 11 version should work OK.
  The first build will take a while as it downloads a lot of dependent jar files.  The build process runs a suite of tests to ensure the 
  application does what is expected.
  
- The tests cover over 90% of the code of the application.  After the build you can see the details of that coverage in the jacoco pages(file:./target/site/jacoco/index.html)
+ The tests cover over 90% of the code of the application.  After the build you can see the details of that coverage in the jacoco report at *./target/site/jacoco/index.html*
+ Jacoco has been configured so that a build fails if there isn't at least 80% test coverage by instructions.
 
 As well as installing the output jar file in your maven repository, the jar file is created in the target directory: *./target/CS-LogAnalyzer-1.0.0-SNAPSHOT.jar*
 
