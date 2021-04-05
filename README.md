@@ -20,9 +20,9 @@ Java 11.0.1 was used for development, but any Java 11 version should work OK.
  The first build will take a while as it downloads a lot of dependent jar files.  The build process runs a suite of tests to ensure the 
  application does what is expected.
  
- The tests cover over 90% of the code of the application.  After the build you can see the details of that coverage in the [jacoco pages](file:./target/site/jacoco/index.html)
+ The tests cover over 90% of the code of the application.  After the build you can see the details of that coverage in the jacoco pages(file:./target/site/jacoco/index.html)
 
-As well as installing the output jar file in your maven repossitory, the jar file is created in the target directory: *./target/CS-LogAnalyzer-1.0.0-SNAPSHOT.jar*
+As well as installing the output jar file in your maven repository, the jar file is created in the target directory: *./target/CS-LogAnalyzer-1.0.0-SNAPSHOT.jar*
 
 ## Run it
 To run the application you invoke it using the java binary and providing the files you want to process as command line parameters after the jar file name.  There are a few small sample files in the *src/test/resources* directory.
