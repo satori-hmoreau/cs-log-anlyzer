@@ -1,4 +1,7 @@
 package ie.sator.csla.services;
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,14 +25,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ie.sator.csla.CsLogAnalyserConfiguration;
+import ie.sator.csla.CsLogAnalyzerConfiguration;
 import ie.sator.csla.models.AnalyzerState;
 import ie.sator.csla.models.MatchedEvent;
 import ie.sator.csla.repositories.MatchedEventRepository;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(initializers = {ConfigFileApplicationContextInitializer.class},
-		classes={CsLogAnalyserConfiguration.class})
+		classes={CsLogAnalyzerConfiguration.class})
 @ActiveProfiles({"test"})
 class LogfileAnalyzerTests {
 	

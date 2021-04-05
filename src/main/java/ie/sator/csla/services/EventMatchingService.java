@@ -1,5 +1,8 @@
 package ie.sator.csla.services;
 
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -20,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
  * It keeps a running total of the number of events it has hatched
  * and you can also query it for the current set of unmatched events.
  *
- * This is a stateful service, so it provides a reset() method to reset its state,
+ * This is a stateful service, so it provides a reset() method to reset its state.
  */
 @Service
 @Slf4j

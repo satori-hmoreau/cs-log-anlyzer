@@ -1,5 +1,7 @@
 package ie.sator.csla.services;
-
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

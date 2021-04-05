@@ -1,7 +1,10 @@
 package ie.sator.csla;
 
-import org.springframework.boot.Banner.Mode;
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

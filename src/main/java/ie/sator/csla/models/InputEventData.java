@@ -1,4 +1,7 @@
 package ie.sator.csla.models;
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,6 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+/** 
+ * JSON data from input files.
+ *
+ */
 @Data
 @Builder
 public class InputEventData {

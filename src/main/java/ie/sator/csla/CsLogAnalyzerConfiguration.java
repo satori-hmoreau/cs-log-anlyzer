@@ -1,4 +1,7 @@
 package ie.sator.csla;
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +16,7 @@ import ie.sator.csla.services.EventMatchingService;
 import ie.sator.csla.services.LogfileAnalyzer;
 
 @Configuration
-public class CsLogAnalyserConfiguration {
+public class CsLogAnalyzerConfiguration {
 
 	@Autowired
 	private EventMatchingService eventMatchingService;

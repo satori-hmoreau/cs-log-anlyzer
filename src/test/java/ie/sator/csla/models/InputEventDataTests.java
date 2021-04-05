@@ -1,4 +1,7 @@
 package ie.sator.csla.models;
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -16,13 +19,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
-import ie.sator.csla.CsLogAnalyserConfiguration;
+import ie.sator.csla.CsLogAnalyzerConfiguration;
 import ie.sator.csla.repositories.MatchedEventRepository;
 import ie.sator.csla.services.EventMatchingService;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(initializers = {ConfigFileApplicationContextInitializer.class},
-		classes = {CsLogAnalyserConfiguration.class, EventMatchingService.class})
+		classes = {CsLogAnalyzerConfiguration.class, EventMatchingService.class})
 @ActiveProfiles({"test"})
 public class InputEventDataTests {
 

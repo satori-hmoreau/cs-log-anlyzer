@@ -1,5 +1,7 @@
 package ie.sator.csla.models;
-
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

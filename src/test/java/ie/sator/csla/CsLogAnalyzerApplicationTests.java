@@ -1,4 +1,7 @@
 package ie.sator.csla;
+/*
+ * Copyright (C) Satori Ltd. 2021.
+ */
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
